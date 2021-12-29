@@ -2,10 +2,12 @@ import { Link, useRouter, useMutation, BlitzPage, Routes } from "blitz"
 import Layout from "app/core/layouts/Layout"
 import createQuestion from "app/questions/mutations/createQuestion"
 import { QuestionForm, FORM_ERROR } from "app/questions/components/QuestionForm"
+import createChoice from "app/choices/mutations/createChoice"
 
 const NewQuestionPage: BlitzPage = () => {
   const router = useRouter()
   const [createQuestionMutation] = useMutation(createQuestion)
+  const [createChoiceMutation] = useMutation(createChoice)
 
   return (
     <div>
@@ -20,7 +22,25 @@ const NewQuestionPage: BlitzPage = () => {
         // initialValues={{}}
         onSubmit={async (values) => {
           try {
-            const question = await createQuestionMutation(values)
+            const question = await createQuestionMutation({
+              text: values.text,
+            })
+
+            await createChoiceMutation({
+              text: values.choice1,
+              questionId: question.id,
+            })
+
+            await createChoiceMutation({
+              text: values.choice2,
+              questionId: question.id,
+            })
+
+            await createChoiceMutation({
+              text: values.choice3,
+              questionId: question.id,
+            })
+
             router.push(Routes.ShowQuestionPage({ questionId: question.id }))
           } catch (error: any) {
             console.error(error)
