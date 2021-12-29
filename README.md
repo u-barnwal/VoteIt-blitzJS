@@ -2,6 +2,18 @@
 
 A simple web app built with [Blitz.js](https://github.com/blitz-js/blitz) that allows registered user to create questions with multiple choices and vote on those choices.
 
+## Screenshots
+
+<p align="left">
+  <img src="./screenshots/home.png" width="45%">
+  &nbsp;
+  <img src="./screenshots/questions.png" width="45%">
+  &nbsp;
+  <img src="./screenshots/new-question.png" width="45%">
+  &nbsp;
+  <img src="./screenshots/question.png" width="45%">
+</p>
+
 ## Getting Started
 
 Run your app in the development mode.
