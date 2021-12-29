@@ -30,7 +30,10 @@ Ensure the `.env.local` file has required environment variables:
 
 ```
 DATABASE_URL=postgresql://<YOUR_DB_USERNAME>@localhost:5432/vote-it
+SHADOW_DATABASE_URL=postgresql://<YOUR_DB_USERNAME>@localhost:5432/vote-it
 ```
+
+[See more](#hosting-database) on hosting database
 
 Ensure the `.env.test.local` file has required environment variables:
 
@@ -76,6 +79,31 @@ Blitz comes with a set of tools that corrects and formats your code, facilitatin
 - **ESLint**: It lints your code: searches for bad practices and tell you about it. You can customize it via the `.eslintrc.js`, and you can install (or even write) plugins to have it the way you like it. It already comes with the [`blitz`](https://github.com/blitz-js/blitz/tree/canary/packages/eslint-config) config, but you can remove it safely. [Learn More](https://blitzjs.com/docs/eslint-config).
 - **Husky**: It adds [githooks](https://git-scm.com/docs/githooks), little pieces of code that get executed when certain Git events are triggerd. For example, `pre-commit` is triggered just before a commit is created. You can see the current hooks inside `.husky/`. If are having problems commiting and pushing, check out ther [troubleshooting](https://typicode.github.io/husky/#/?id=troubleshoot) guide. [Learn More](https://blitzjs.com/docs/husky-config).
 - **Prettier**: It formats your code to look the same everywhere. You can configure it via the `.prettierrc` file. The `.prettierignore` contains the files that should be ignored by Prettier; useful when you have large files or when you want to keep a custom formatting. [Learn More](https://blitzjs.com/docs/prettier-config).
+
+## Hosting Database
+
+### Hosting on [SuperBase](https://superbase.io)
+
+- Login/Register for a free account
+- Create a new Project (you might have to create an Organization first)
+- Wait for the project to finish building
+- Once done, navigate to **Database** from side bar
+- Navigate to **Settings** > **Connection Polling**
+- Scroll to the bottom of the page and copy the _Connection string_
+- Save the string as `DATABASE_URL` in `env` file. Don't forget to replace the password
+- **Repeat the same steps for `SHADOW_DATABASE_URL`**
+
+_**Ref:** [Blog](https://cb-ashik.hashnode.dev/deploy-blitzjs-app-to-vercel) by Ashik Chapagain_
+
+### Reset Database Password
+
+- Navigate to **Dashboard SQL editor** on SuperBase
+- Hit **+ New Query**
+- Run the following query
+  ```
+  alter user postgres
+  with password 'YOUR_NEW_PASSWORD';
+  ```
 
 ## Credits
 
