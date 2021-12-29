@@ -8,7 +8,7 @@ import { QuestionForm, FORM_ERROR } from "app/questions/components/QuestionForm"
 export const EditQuestion = () => {
   const router = useRouter()
   const questionId = useParam("questionId", "number")
-  const [question, { setQueryData }] = useQuery(
+  const [question, { refetch }] = useQuery(
     getQuestion,
     { id: questionId },
     {
@@ -41,7 +41,7 @@ export const EditQuestion = () => {
                 id: question.id,
                 ...values,
               })
-              await setQueryData(updated)
+              await refetch()
               router.push(Routes.ShowQuestionPage({ questionId: updated.id }))
             } catch (error: any) {
               console.error(error)
